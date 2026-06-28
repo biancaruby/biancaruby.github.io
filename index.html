@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Portfolio · Light professional</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8f6f2;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e1e1e;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #e0dbd1;
+      padding-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .page-header h1 {
+      font-weight: 350;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      color: #2c2a28;
+    }
+
+    .page-header .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .page-header .sub {
+      font-weight: 300;
+      color: #6b645a;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .page-header .resume-link {
+      font-weight: 400;
+      color: #6b645a;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+      padding-bottom: 2px;
+    }
+
+    .page-header .resume-link:hover {
+      color: #2c2a28;
+      border-bottom-color: #2c2a28;
+    }
+
+    .page-header .resume-link i {
+      margin-right: 6px;
+      font-size: 0.9rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem 1.8rem;
+    }
+
+    .art-card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      overflow: hidden;
+      border: 1px solid #ece8e0;
+      padding-bottom: 1rem;
+    }
+
+    .art-card:hover {
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      border-color: #d6cec0;
+    }
+
+    .art-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #eae5dc;
+      transition: opacity 0.2s;
+    }
+
+    .art-card .card-info {
+      padding: 0.9rem 1rem 0.4rem;
+    }
+
+    .art-card .card-title {
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+      color: #1f1d1b;
+    }
+
+    .art-card .card-medium {
+      font-weight: 350;
+      color: #716b61;
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
+      letter-spacing: 0.2px;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(35, 33, 30, 0.35);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      max-width: 1000px;
+      width: 100%;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.3);
+      transform: scale(0.96) translateY(10px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-image-section {
+      flex: 1.4;
+      background: #f0ede7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      min-height: 300px;
+      position: relative;
+    }
+
+    .modal-image-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .modal-image-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      background: white;
+    }
+
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      color: #2b2824;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-nav-btn:hover {
+      background: #ffffff;
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .modal-nav-btn.prev {
+      left: 10px;
+    }
+
+    .modal-nav-btn.next {
+      right: 10px;
+    }
+
+    .modal-image-counter {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 350;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-description {
+      flex: 1;
+      padding: 2.2rem 2rem 2rem 1.8rem;
+      background: #fcfaf7;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #ece7df;
+      min-width: 200px;
+    }
+
+    .modal-description .modal-title {
+      font-size: 2rem;
+      font-weight: 380;
+      letter-spacing: -0.02em;
+      color: #1f1c19;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-description .modal-medium {
+      font-weight: 350;
+      color: #6f685d;
+      font-size: 1rem;
+      border-bottom: 1px solid #e2dbd0;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-description .modal-desc-text {
+      font-weight: 350;
+      color: #2e2a26;
+      line-height: 1.6;
+      font-size: 1rem;
+      flex: 1;
+      padding-right: 0.5rem;
+      overflow-y: auto;
+    }
+
+    .modal-description .modal-desc-text p {
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-url-link {
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2dbd0;
+    }
+
+    .modal-url-link a {
+      color: #4a6a7a;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-url-link a:hover {
+      color: #1f3a47;
+      text-decoration: underline;
+    }
+
+    .modal-url-link a i {
+      font-size: 0.85rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      border: none;
+      border-radius: 40px;
+      width: 40px;
+      height: 40px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2b2824;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: #ffffff;
+      transform: scale(1.04);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .modal-close i {
+      font-size: 1.3rem;
+    }
+
+    .resume-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(35, 33, 30, 0.4);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s;
+      z-index: 2000;
+      padding: 1.5rem;
+    }
+
+    .resume-modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .resume-modal-card {
+      background: #ffffff;
+      max-width: 900px;
+      width: 100%;
+      height: 85vh;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.3);
+      transform: scale(0.96) translateY(10px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resume-modal-overlay.open .resume-modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .resume-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: #fcfaf7;
+      border-bottom: 1px solid #ece7df;
+      flex-shrink: 0;
+    }
+
+    .resume-modal-header span {
+      font-weight: 400;
+      color: #2c2a28;
+      font-size: 1.1rem;
+    }
+
+    .resume-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: #2b2824;
+      cursor: pointer;
+      padding: 0.3rem 0.6rem;
+      border-radius: 30px;
+      transition: background 0.15s;
+    }
+
+    .resume-close-btn:hover {
+      background: #ece7df;
+    }
+
+    .resume-iframe-wrapper {
+      flex: 1;
+      background: #f0ede7;
+    }
+
+    .resume-iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Loading state */
+    .loading-message {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #6b645a;
+      font-size: 1.2rem;
+      grid-column: 1 / -1;
+    }
+
+    .loading-message i {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 1.2rem; }
+      .modal-card {
+        flex-direction: column;
+        max-height: 95vh;
+        border-radius: 24px;
+      }
+      .modal-image-section {
+        padding: 1.5rem 1rem 0.5rem;
+        min-height: 200px;
+        flex: none;
+      }
+      .modal-image-wrapper img {
+        max-height: 40vh;
+      }
+      .modal-description {
+        padding: 1.2rem 1.5rem 1.8rem;
+        border-left: none;
+        border-top: 1px solid #ece7df;
+      }
+      .modal-description .modal-title {
+        font-size: 1.6rem;
+      }
+      .modal-close {
+        top: 0.7rem;
+        right: 0.8rem;
+        background: rgba(255,255,255,0.75);
+        width: 36px;
+        height: 36px;
+      }
+      .gallery-grid {
+        gap: 1.2rem;
+      }
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+      .page-header .header-right {
+        gap: 1rem;
+      }
+      .resume-modal-card {
+        height: 90vh;
+        border-radius: 20px;
+      }
+      .modal-nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+      }
+      .modal-nav-btn.prev {
+        left: 5px;
+      }
+      .modal-nav-btn.next {
+        right: 5px;
+      }
+    }
+
+    img[src=""] {
+      opacity: 0.3;
+      background: #d9d2c6;
+    }
+
+    .text-muted {
+      color: #7a7266;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header class="page-header">
+    <h1>✦ Studio <span style="font-weight:300;">·</span> Portfolio</h1>
+    <div class="header-right">
+      <span class="sub"><i class="far fa-images" style="margin-right:6px;"></i> <span id="artworkCount">0</span> works</span>
+      <span class="resume-link" id="resumeLink">
+        <i class="far fa-file-pdf"></i> Resume
+      </span>
+    </div>
+  </header>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="loading-message">
+      <i class="fas fa-spinner fa-spin"></i> Loading artworks...
+    </div>
+  </div>
+</div>
+
+<!-- Modal (popup for artwork) -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card">
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close popup">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <div class="modal-image-section" id="modalImageSection">
+      <div class="modal-image-wrapper">
+        <img id="modalImage" src="" alt="artwork enlarged">
+        <button class="modal-nav-btn prev" id="prevImageBtn" style="display:none;">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav-btn next" id="nextImageBtn" style="display:none;">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-image-counter" id="imageCounter" style="display:none;">
+          1 / 1
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal-description" id="modalDescriptionPanel">
+      <div class="modal-title" id="modalTitle">Title</div>
+      <div class="modal-medium" id="modalMedium">Medium</div>
+      <div class="modal-desc-text" id="modalDescText">
+        <p>Description placeholder.</p>
+      </div>
+      <div class="modal-url-link" id="modalUrlLink" style="display:none;">
+        <a href="#" target="_blank" rel="noopener noreferrer" id="modalUrlAnchor">
+          <i class="fas fa-external-link-alt"></i> View Project
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Resume Modal (PDF viewer) -->
+<div class="resume-modal-overlay" id="resumeModalOverlay">
+  <div class="resume-modal-card">
+    <div class="resume-modal-header">
+      <span><i class="far fa-file-pdf" style="margin-right:8px;"></i>Resume</span>
+      <button class="resume-close-btn" id="resumeCloseBtn" aria-label="Close resume">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="resume-iframe-wrapper">
+      <iframe id="resumeIframe" src="" title="Resume PDF viewer"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- CONFIGURATION ----------
+    // For GitHub Pages, use relative paths
+    // If your site is at username.github.io/repository-name/
+    // Use: "./artworks.json" or "/repository-name/artworks.json"
+    const DATA_URL = "./artworks.json";
+    const RESUME_PDF_URL = "./assets/pdfs/resume.pdf";  // Update this path
+    
+    // ---------- DOM REFERENCES ----------
+    const galleryGrid = document.getElementById('galleryGrid');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMedium = document.getElementById('modalMedium');
+    const modalDescText = document.getElementById('modalDescText');
+    const modalUrlLink = document.getElementById('modalUrlLink');
+    const modalUrlAnchor = document.getElementById('modalUrlAnchor');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const artworkCount = document.getElementById('artworkCount');
+    const prevBtn = document.getElementById('prevImageBtn');
+    const nextBtn = document.getElementById('nextImageBtn');
+    const imageCounter = document.getElementById('imageCounter');
+
+    // Resume elements
+    const resumeModalOverlay = document.getElementById('resumeModalOverlay');
+    const resumeIframe = document.getElementById('resumeIframe');
+    const resumeCloseBtn = document.getElementById('resumeCloseBtn');
+    const resumeLink = document.getElementById('resumeLink');
+
+    // ---------- STATE ----------
+    let artworks = [];
+    let currentArtworkIndex = 0;
+    let currentImageIndex = 0;
+    let currentImages = [];
+
+    // ---------- FETCH DATA ----------
+    async function loadArtworks() {
+      try {
+        const response = await fetch(DATA_URL);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        artworks = await response.json();
+        renderGallery();
+        artworkCount.textContent = artworks.length;
+      } catch (error) {
+        console.error('Error loading artworks:', error);
+        galleryGrid.innerHTML = `
+          <div class="loading-message" style="color:#c0392b;">
+            <i class="fas fa-exclamation-circle"></i> Failed to load artworks. 
+            <br><small style="font-size:0.9rem;">Error: ${error.message}</small>
+            <br><br>
+            <span style="font-size:0.9rem; color:#6b645a;">
+              Make sure <strong>artworks.json</strong> exists in the same folder.
+            </span>
+          </div>
+        `;
+      }
+    }
+
+    // ---------- RENDER GALLERY ----------
+    function renderGallery() {
+      galleryGrid.innerHTML = '';
+      
+      if (!artworks || artworks.length === 0) {
+        galleryGrid.innerHTML = `
+          <div class="loading-message">
+            <i class="far fa-images"></i> No artworks found.
+          </div>
+        `;
+        return;
+      }
+
+      artworks.forEach((art, index) => {
+        const card = document.createElement('div');
+        card.className = 'art-card';
+        card.setAttribute('data-index', index);
+
+        const img = document.createElement('img');
+        const thumbSrc = (art.images && art.images.length > 0) ? art.images[0] : 'https://picsum.photos/seed/' + index + '/600/600';
+        img.src = thumbSrc;
+        img.alt = art.title || 'Artwork';
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'card-info';
+
+        const titleSpan = document.createElement('div');
+        titleSpan.className = 'card-title';
+        titleSpan.textContent = art.title || 'Untitled';
+
+        const mediumSpan = document.createElement('div');
+        mediumSpan.className = 'card-medium';
+        mediumSpan.textContent = art.medium || '';
+
+        infoDiv.appendChild(titleSpan);
+        infoDiv.appendChild(mediumSpan);
+        card.appendChild(img);
+        card.appendChild(infoDiv);
+
+        card.addEventListener('click', () => {
+          openModal(index);
+        });
+
+        galleryGrid.appendChild(card);
+      });
+
+      document.querySelectorAll('.art-card img').forEach(img => {
+        img.addEventListener('error', function() {
+          this.src = 'https://picsum.photos/seed/' + Math.random() + '/600/600';
+        });
+      });
+    }
+
+    // ---------- OPEN MODAL ----------
+    function openModal(index) {
+      const art = artworks[index];
+      if (!art) return;
+
+      currentArtworkIndex = index;
+      currentImages = art.images || [];
+      
+      currentImageIndex = 0;
+      updateImageDisplay();
+
+      modalTitle.textContent = art.title || 'Untitled';
+      modalMedium.textContent = art.medium || '';
+
+      const desc = art.description || 'No description provided.';
+      if (desc.includes('<p>')) {
+        modalDescText.innerHTML = desc;
+      } else {
+        modalDescText.innerHTML = `<p>${desc}</p>`;
+      }
+
+      if (art.url && art.url.trim() !== '') {
+        modalUrlLink.style.display = 'block';
+        modalUrlAnchor.href = art.url;
+        modalUrlAnchor.innerHTML = `<i class="fas fa-external-link-alt"></i> ${art.urlLabel || 'View Project'}`;
+      } else {
+        modalUrlLink.style.display = 'none';
+      }
+
+      const hasMultipleImages = currentImages.length > 1;
+      prevBtn.style.display = hasMultipleImages ? 'flex' : 'none';
+      nextBtn.style.display = hasMultipleImages ? 'flex' : 'none';
+      imageCounter.style.display = hasMultipleImages ? 'block' : 'none';
+
+      modalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // ---------- UPDATE IMAGE DISPLAY ----------
+    function updateImageDisplay() {
+      if (currentImages.length === 0) {
+        modalImage.src = 'https://picsum.photos/seed/' + Math.random() + '/800/800';
+        modalImage.alt = 'No image available';
+        imageCounter.textContent = '0 / 0';
+        return;
+      }
+
+      modalImage.src = currentImages[currentImageIndex];
+      modalImage.alt = 'Artwork image ' + (currentImageIndex + 1);
+      imageCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+    }
+
+    // ---------- NAVIGATE IMAGES ----------
+    function prevImage() {
+      if (currentImages.length === 0) return;
+      currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+      updateImageDisplay();
+    }
+
+    function nextImage() {
+      if (currentImages.length === 0) return;
+      currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+      updateImageDisplay();
+    }
+
+    // ---------- CLOSE MODAL ----------
+    function closeModal() {
+      modalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ---------- RESUME FUNCTIONS ----------
+    function openResume() {
+      resumeIframe.src = RESUME_PDF_URL;
+      resumeModalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeResume() {
+      resumeModalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { resumeIframe.src = ''; }, 300);
+    }
+
+    // ---------- KEYBOARD NAVIGATION ----------
+    document.addEventListener('keydown', (e) => {
+      if (modalOverlay.classList.contains('open')) {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevImage();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nextImage();
+        } else if (e.key === 'Escape') {
+          closeModal();
+        }
+      }
+      if (resumeModalOverlay.classList.contains('open') && e.key === 'Escape') {
+        closeResume();
+      }
+    });
+
+    // ---------- EVENT LISTENERS ----------
+    closeBtn.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevImage();
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextImage();
+    });
+
+    resumeLink.addEventListener('click', openResume);
+    resumeCloseBtn.addEventListener('click', closeResume);
+
+    resumeModalOverlay.addEventListener('click', (e) => {
+      if (e.target === resumeModalOverlay) {
+        closeResume();
+      }
+    });
+
+    // ---------- INIT ----------
+    loadArtworks();
+
+  })();
+</script>
+</body>
+</html>
