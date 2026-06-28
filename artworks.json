@@ -4,9 +4,9 @@
     "medium": "Mixed media, 140×90 cm",
     "description": "Skateboarding is a culture of innovation and freedom. What began as a source of fun on land between tidal breaks for Californian surfers, who attached two wheels onto grocery crates or wooden planks, has expanded from North America and Canada, to Europe and Australia, and now increasingly Asia and Africa. <br><br>World Without Bo(a)rders represents the connectivity on earth, where every nation and island is never fully on its own, no matter the distance. These connections are delicate yet inescapable; like the influence of countries on each other. Skateboarding is one of many global phenomena that spread from what might seem like an isolated area - a beach in North America - to the rest of the world.",
     "images": [
-      "biancaruby.github.io/assets/images/wwwb_0.jfif",
-      "biancaruby.github.io/assets/images/wwwb_1.jfif",
-      "biancaruby.github.io/assets/images/wwwb_2.jfif"
+      "assets/images/wwwb_0.jfif",
+      "assets/images/wwwb_1.jfif",
+      "assets/images/wwwb_2.jfif"
     ],
     "url": "https://www.cannotbeboardered.com/the-chain-gang.html",
     "urlLabel": "Cannot/ Be/ Bo(a)rdered"
@@ -16,7 +16,7 @@
     "medium": "Acrylic on paper, 297 x 420 mm (A3)",
     "description": "",
     "images": [
-      "biancaruby.github.io/assets/images/hug.jfif"
+      "assets/images/hug.jfif"
     ],
     "url": "",
     "urlLabel": ""
@@ -26,10 +26,10 @@
     "medium": "Mixed media",
     "description": "Portraits of friends, family, passerbys and myself",
     "images": [
-      "biancaruby.github.io/assets/images/bday_port_sktech.jfif",
-      "biancaruby.github.io/assets/images/D_port.jfif",
-      "biancaruby.github.io/assets/images/L_port.jfif",
-      "biancaruby.github.io/assets/images/s_port.jfif"
+      "assets/images/bday_port_sktech.jfif",
+      "assets/images/D_port.jfif",
+      "assets/images/L_port.jfif",
+      "assets/images/s_port.jfif"
     ],
     "url": "",
     "urlLabel": ""
