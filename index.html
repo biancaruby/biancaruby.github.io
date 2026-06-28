@@ -592,11 +592,33 @@
 <script>
   (function() {
     // ---------- CONFIGURATION ----------
-    // For GitHub Pages, use relative paths
-    // If your site is at username.github.io/repository-name/
-    // Use: "./artworks.json" or "/repository-name/artworks.json"
-    const DATA_URL = "./artworks.json";
-    const RESUME_PDF_URL = "assets/pdf/resume.pdf";  // Update this path
+    // Auto-detect if we're on GitHub Pages or local
+    function getBaseUrl() {
+      // Check if we're on GitHub Pages
+      if (window.location.hostname.includes('github.io')) {
+        // Get the repository name from the path
+        const pathParts = window.location.pathname.split('/');
+        if (pathParts.length > 1) {
+          // If we're in a subdirectory (repo name), use that as base
+          const repoName = pathParts[1];
+          return `/${repoName}`;
+        }
+        return '';
+      }
+      // Local development
+      return '';
+    }
+
+    const BASE_URL = getBaseUrl();
+    
+    // Paths - these will work for both local and GitHub Pages
+    const DATA_URL = `${BASE_URL}/artworks.json`;
+    const RESUME_PDF_URL = `${BASE_URL}/assets/pdfs/resume.pdf`;
+    
+    // For debugging - you can see the paths in console
+    console.log('Base URL:', BASE_URL);
+    console.log('Data URL:', DATA_URL);
+    console.log('Resume URL:', RESUME_PDF_URL);
     
     // ---------- DOM REFERENCES ----------
     const galleryGrid = document.getElementById('galleryGrid');
@@ -625,6 +647,24 @@
     let currentImageIndex = 0;
     let currentImages = [];
 
+    // ---------- HELPER: Fix Image Paths ----------
+    function fixImagePath(path) {
+      if (!path) return path;
+      
+      // If it's already a full URL (http:// or https://), return as is
+      if (path.startsWith('http://') || path.startsWith('https://')) {
+        return path;
+      }
+      
+      // If it starts with /, it's already absolute from root
+      if (path.startsWith('/')) {
+        return path;
+      }
+      
+      // For relative paths, prepend BASE_URL
+      return `${BASE_URL}/${path}`;
+    }
+
     // ---------- FETCH DATA ----------
     async function loadArtworks() {
       try {
@@ -641,7 +681,8 @@
             <br><small style="font-size:0.9rem;">Error: ${error.message}</small>
             <br><br>
             <span style="font-size:0.9rem; color:#6b645a;">
-              Make sure <strong>artworks.json</strong> exists in the same folder.
+              Make sure <strong>artworks.json</strong> exists in the root folder.
+              <br>Current URL: ${DATA_URL}
             </span>
           </div>
         `;
@@ -667,7 +708,9 @@
         card.setAttribute('data-index', index);
 
         const img = document.createElement('img');
-        const thumbSrc = (art.images && art.images.length > 0) ? art.images[0] : 'https://picsum.photos/seed/' + index + '/600/600';
+        let thumbSrc = (art.images && art.images.length > 0) ? art.images[0] : 'https://picsum.photos/seed/' + index + '/600/600';
+        // Fix the image path
+        thumbSrc = fixImagePath(thumbSrc);
         img.src = thumbSrc;
         img.alt = art.title || 'Artwork';
 
@@ -707,7 +750,7 @@
       if (!art) return;
 
       currentArtworkIndex = index;
-      currentImages = art.images || [];
+      currentImages = (art.images || []).map(img => fixImagePath(img));
       
       currentImageIndex = 0;
       updateImageDisplay();
