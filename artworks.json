@@ -1,68 +1,35 @@
 [
   {
-    "title": "Horizon Drift",
-    "medium": "Oil on linen, 120×90 cm",
-    "description": "A meditation on transitional spaces between land and sea.<br>Soft layers of ultramarine and warm ochre<br>build a memory of the coast at dusk.",
+    "title": "World Without Bo(a)rders",
+    "medium": "Mixed media, 140×90 cm",
+    "description": "Skateboarding is a culture of innovation and freedom. What began as a source of fun on land between tidal breaks for Californian surfers, who attached two wheels onto grocery crates or wooden planks, has expanded from North America and Canada, to Europe and Australia, and now increasingly Asia and Africa. <br><br>World Without Bo(a)rders represents the connectivity on earth, where every nation and island is never fully on its own, no matter the distance. These connections are delicate yet inescapable; like the influence of countries on each other. Skateboarding is one of many global phenomena that spread from what might seem like an isolated area - a beach in North America - to the rest of the world.",
     "images": [
-      "assets/images/horizon-drift-1.jpg",
-      "assets/images/horizon-drift-2.jpg",
-      "assets/images/horizon-drift-3.jpg"
+      "assets/images/wwwb_0.jfif",
+      "assets/images/wwwb_1.jfif".
+      "assets/images/wwwb_2.jfif"
     ],
-    "url": "https://www.example.com/horizon-drift",
-    "urlLabel": "View Project Details"
+    "url": "https://www.cannotbeboardered.com/the-chain-gang.html",
+    "urlLabel": "Cannot/ Be/ Bo(a)rdered"
   },
   {
-    "title": "Verdant Stillness",
-    "medium": "Acrylic & graphite on paper, 70×100 cm",
-    "description": "Interplay of organic forms and geometric restraint.<br>Botanical motifs are abstracted into rhythmic gestures,<br>evoking the quiet pulse of a greenhouse.",
+    "title": "Hug",
+    "medium": "Acrylic on paper, 297 x 420 mm (A3)",
+    "description": "",
     "images": [
-      "assets/images/verdant-stillness-1.jpg",
-      "assets/images/verdant-stillness-2.jpg"
-    ],
-    "url": "https://www.example.com/verdant-stillness",
-    "urlLabel": "See Process"
-  },
-  {
-    "title": "Pulse & Echo",
-    "medium": "Mixed media, 80×80 cm",
-    "description": "Collaged textiles and pigment on panel.<br>This piece explores the resonance of memory through fractured surfaces and repeated marks.",
-    "images": [
-      "assets/images/pulse-echo-1.jpg"
+      "assets/images/hug.jfif"
     ],
     "url": "",
     "urlLabel": ""
   },
   {
-    "title": "Lunar Glaze",
-    "medium": "Glazed ceramic & pigment, 45×45 cm",
-    "description": "A ceramic work that captures the fleeting quality of moonlight on water.<br>The surface shifts between matte and gloss, inviting touch.",
+    "title": "Portraits",
+    "medium": "Mixed media",
+    "description": "Portraits of friends, family, passerbys and myself",
     "images": [
-      "assets/images/lunar-glaze-1.jpg",
-      "assets/images/lunar-glaze-2.jpg",
-      "assets/images/lunar-glaze-3.jpg",
-      "assets/images/lunar-glaze-4.jpg"
-    ],
-    "url": "https://www.example.com/lunar-glaze",
-    "urlLabel": "View Collection"
-  },
-  {
-    "title": "Rust Veil",
-    "medium": "Iron oxide, beeswax on canvas, 100×80 cm",
-    "description": "Earthy and atmospheric, this encaustic work uses rust pigments and wax to evoke the patina of industrial decay and natural reclamation.",
-    "images": [
-      "assets/images/rust-veil-1.jpg",
-      "assets/images/rust-veil-2.jpg",
-      "assets/images/rust-veil-3.jpg"
-    ],
-    "url": "https://www.example.com/rust-veil",
-    "urlLabel": "Exhibition Info"
-  },
-  {
-    "title": "Fugue in Blue",
-    "medium": "Watercolour & ink, 56×76 cm",
-    "description": "A lyrical abstraction in indigo and cerulean.<br>The fluid marks suggest movement, wind, and the tension between control and release.",
-    "images": [
-      "assets/images/fugue-blue-1.jpg"
+      "assets/images/bday_port_sktech.jfif",
+      "assets/images/D_port.jfif",
+      "assets/images/L_port.jfif",
+      "assets/images/s_port.jfif"
     ],
     "url": "",
     "urlLabel": ""
